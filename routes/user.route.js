@@ -2,9 +2,44 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { UserModel } = require("./UserModel");
-
+const { UserModel } = require("../models/user.model");
+const { BlackListModel } = require("../models/blacklisttoken.model");
 const userRouter = express.Router();
+/**
+ * @swagger
+ * tags:
+ *   name: Users
+ *   description: User management endpoints
+ */
+
+/**
+ * @swagger
+ * /users/register:
+ *   post:
+ *     summary: Register a new user
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: User registered successfully
+ *       400:
+ *         description: Invalid request or email already exists
+ *       500:
+ *         description: Server error
+ */
+
 userRouter.post("/register", async (req, res) => {
     try {
         const { name, email, password } = req.body;
@@ -30,7 +65,31 @@ userRouter.post("/register", async (req, res) => {
         res.status(500).json({ message: "Server Error" });
     }
 });
-
+/**
+ * @swagger
+ * /users/login:
+ *   post:
+ *     summary: Login with email and password
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Login successful
+ *       400:
+ *         description: Invalid email or password
+ *       500:
+ *         description: Server error
+ */
 // Login Route
 userRouter.post("/login", async (req, res) => {
     try {
@@ -56,7 +115,30 @@ userRouter.post("/login", async (req, res) => {
         res.status(500).json({ message: "Server Error" });
     }
 });
-
+/**
+ * @swagger
+ * /users/logout:
+ *   post:
+ *     summary: Logout user
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               authorization:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Logout successful
+ *       401:
+ *         description: Unauthorized or token already blacklisted
+ *       500:
+ *         description: Server error
+ */
+// logout
 userRouter.post("/logout", async (req, res) => {
     try {
         const { authorization } = req.headers;

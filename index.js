@@ -2,10 +2,12 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const { connnection } = require("./db");
+const userRouter = require("./routes/user.route");
 require("dotenv").config();
 const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
+app.use("/user", userRouter);
 app.get("/", (req, res) => {
     res.send(`🌟 Welcome to Pioneer! 🌟
 
