@@ -3,11 +3,45 @@ const app = express();
 const cors = require("cors");
 const { connnection } = require("./db");
 const userRouter = require("./routes/user.route");
+const { ProtectedRoute } = require("./routes/protected.route");
+const { ApiDataRouter } = require("./routes/apiData.route");
+const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerUI = require("swagger-ui-express");
 require("dotenv").config();
 const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 app.use("/user", userRouter);
+app.use("/protected", ProtectedRoute);
+app.use("/api", ApiDataRouter);
+// Swagger options
+const swaggerOptions = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: "Public API List",
+            version: "1.0.0",
+            servers: [
+                {
+                    url: "https://pioneer-labs-assignment.onrender.com"
+                }
+            ]
+        },
+        components: {
+            securitySchemes: {
+                BearerAuth: {
+                    type: "http",
+                    scheme: "bearer",
+                },
+            },
+        },
+    },
+    apis: ["./routes/*.js"], // Specify the path to your route files
+};
+const openAPISpecification = swaggerJsdoc(swaggerOptions);
+// Swagger UI setup
+app.use("/docs", swaggerUI.serve, swaggerUI.setup(openAPISpecification));
+
 app.get("/", (req, res) => {
     res.send(`🌟 Welcome to Pioneer! 🌟
 
