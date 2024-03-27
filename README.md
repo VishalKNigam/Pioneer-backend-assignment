@@ -1,29 +1,40 @@
-# Project Name
+# Project Description
 
-Brief description of the project.
+Pioneer Backend Project
 
 ## Table of Contents
 
 1. [Introduction](#introduction)
-2. [Installation](#installation)
-3. [Usage](#usage)
-4. [Endpoints](#endpoints)
+2. [Deployed Link](#installation)
+3. [Installation](#installation)
+4. [Usage](#usage)
+5. [Endpoints](#endpoints)
    - [User Management](#user-management)
    - [Protected Routes](#protected-routes)
    - [Public API Data](#public-api-data)
-5. [License](#license)
 
 ## Introduction
 
-Provide a brief introduction about the project, its purpose, and key features.
+Welcome to Pioneer Backend Project, a comprehensive API project designed to provide seamless user management, access to public API data, and protected routes with authentication. This project aims to simplify user registration, authentication, and access to public API data through a user-friendly API interface.
+
+## Deployed Link
+
+- [Deployed Link](https://pioneer-backend-assignment-jmzv.onrender.com/)
 
 ## Installation
 
-Provide instructions on how to install and set up the project locally.
+- Clone the Repo - https://github.com/VishalKNigam/Pioneer-backend-assignment
+- Install the dependencies - npm install
+- Run the command in terminal - npm run server
+- Open it in browser - http://localhost:8080
+- Swagger docs available at -  http://localhost:8080/docs
 
 ## Usage
 
-Explain how to use the project, including any configuration or environment setup required.
+Create a .env file and enter following details:-
+- PORT
+- MongoURL
+- JWT_SECRET
 
 ## Endpoints
 
@@ -103,4 +114,4 @@ Explain how to use the project, including any configuration or environment setup
 
    Explore the API documentation using Swagger UI:
 
-- [Swagger Documentation](http://localhost:8080/docs)
+- [Swagger Documentation](https://pioneer-backend-assignment-jmzv.onrender.com/docs/)
